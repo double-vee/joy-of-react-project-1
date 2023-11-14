@@ -13,7 +13,9 @@ function Game() {
   const [guesses, setGuesses] = useState([]);
 
   function addGuess(input) {
-    setGuesses((prev) => [...prev, input]);
+    if (guesses.length < 6) {
+      setGuesses((prev) => [...prev, input]);
+    }
   }
 
   return (
