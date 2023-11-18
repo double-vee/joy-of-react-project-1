@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import GuessInput from '../GuessInput';
 import GuessResults from '../GuessResults';
-import Banner from '../Banner';
+import WonBanner from '../WonBanner/';
+import LostBanner from '../LostBanner/';
 import { sample } from '../../utils';
 import { WORDS } from '../../data';
 import { NUM_OF_GUESSES_ALLOWED } from '../../constants';
@@ -33,13 +34,8 @@ function Game() {
     <>
       <GuessResults guesses={guesses} answer={answer} />
       <GuessInput addGuess={addGuess} disabled={gameResult === 'lost'} />
-      {gameResult !== 'pending' && (
-        <Banner
-          gameResult={gameResult}
-          numOfGuesses={guesses.length}
-          answer={answer}
-        />
-      )}
+      {gameResult === 'won' && <WonBanner numOfGuesses={guesses.length} />}
+      {gameResult === 'lost' && <LostBanner answer={answer} />}
     </>
   );
 }
