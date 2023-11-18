@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-function GuessInput({ addGuess }) {
+function GuessInput({ addGuess, ...rest }) {
   const [guess, setGuess] = useState('');
 
   function handleSubmit(e) {
@@ -22,6 +22,7 @@ function GuessInput({ addGuess }) {
         pattern="[a-zA-Z]{5}"
         title="5-letter word"
         required
+        {...rest}
       ></input>
     </form>
   );
