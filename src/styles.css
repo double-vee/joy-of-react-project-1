@@ -185,6 +185,15 @@ h1 {
   color: white;
 }
 
+.restart {
+  margin-top: 8px;
+  padding: 8px 16px;
+  border: 2px solid currentColor;
+  border-radius: 4px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
 .visually-hidden {
   position: absolute;
   overflow: hidden;

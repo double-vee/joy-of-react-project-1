@@ -1,6 +1,7 @@
 import Banner from '../Banner';
+import RestartButton from '../RestartButton';
 
-function WonBanner({ numOfGuesses }) {
+function WonBanner({ numOfGuesses, handleRestart }) {
   return (
     <Banner status="happy">
       <p>
@@ -10,6 +11,7 @@ function WonBanner({ numOfGuesses }) {
         </strong>
         .
       </p>
+      <RestartButton handleRestart={handleRestart} />
     </Banner>
   );
 }

@@ -7,14 +7,20 @@ import { sample } from '../../utils';
 import { WORDS } from '../../data';
 import { NUM_OF_GUESSES_ALLOWED } from '../../constants';
 
-// Pick a random word on every pageload.
-const answer = sample(WORDS);
-// To make debugging easier, we'll log the solution in the console.
-console.info({ answer });
-
 function Game() {
+  const [answer, setAnswer] = useState(() => sample(WORDS));
+  console.info({ answer });
+
   const [guesses, setGuesses] = useState([]);
   const [gameResult, setGameResult] = useState('pending');
+
+  function handleRestart() {
+    const nextAnswer = sample(WORDS);
+    setAnswer((prev) => (nextAnswer === prev ? sample(WORDS) : nextAnswer));
+
+    setGuesses([]);
+    setGameResult('pending');
+  }
 
   function addGuess(input) {
     if (guesses.length < NUM_OF_GUESSES_ALLOWED) {
@@ -34,8 +40,15 @@ function Game() {
     <>
       <GuessResults guesses={guesses} answer={answer} />
       <GuessInput addGuess={addGuess} disabled={gameResult === 'lost'} />
-      {gameResult === 'won' && <WonBanner numOfGuesses={guesses.length} />}
-      {gameResult === 'lost' && <LostBanner answer={answer} />}
+      {gameResult === 'won' && (
+        <WonBanner
+          numOfGuesses={guesses.length}
+          handleRestart={handleRestart}
+        />
+      )}
+      {gameResult === 'lost' && (
+        <LostBanner answer={answer} handleRestart={handleRestart} />
+      )}
     </>
   );
 }
